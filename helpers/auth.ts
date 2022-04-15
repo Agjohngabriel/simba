@@ -1,10 +1,19 @@
 import { compare, hash } from "bcryptjs";
 import { Session } from "next-auth";
 import { getSession as getSessionInner, GetSessionParams } from "next-auth/react";
+import slugify from "slugify";
 
 export async function hashPassword(password: string) {
   const hashedPassword = await hash(password, 12);
   return hashedPassword;
+}
+
+export async function slugName(name: string) {
+  const slugName = slugify(name, {
+    replacement: "-",
+    lower: true,
+  });
+  return slugName;
 }
 
 export async function verifyPassword(password: string, hashedPassword: string) {

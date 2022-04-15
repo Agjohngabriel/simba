@@ -2,6 +2,8 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { ReactNode, useEffect } from "react";
 
+import Header from "@components/Header";
+
 export default function Shell(props: { children: ReactNode }) {
   const { data: session, status } = useSession();
   const loading = status === "loading";
@@ -16,12 +18,13 @@ export default function Shell(props: { children: ReactNode }) {
         },
       });
     }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading, session]);
 
   return (
     <div>
-      <h1 className="py-4 text-xl font-bold">SHELL COMPONENT</h1>
+      <Header />
       <div>{props.children}</div>
     </div>
   );

@@ -15,7 +15,8 @@ export default function Login({ csrfToken }: ServerSideProps) {
   const [password, setPassword] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const callbackUrl = typeof router.query?.callbackUrl === "string" ? router.query.callbackUrl : "/private";
+  const callbackUrl =
+    typeof router.query?.callbackUrl === "string" ? router.query.callbackUrl : "/eventtypes";
 
   async function handleSubmit(e: React.SyntheticEvent) {
     e.preventDefault();
@@ -44,34 +45,56 @@ export default function Login({ csrfToken }: ServerSideProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input name="csrfToken" type="hidden" defaultValue={csrfToken || undefined} hidden />
-      <input
-        id="email"
-        name="email"
-        type="email"
-        placeholder="email"
-        required
-        value={email}
-        onInput={(e) => setEmail(e.currentTarget.value)}
-        className="block border border-neutral-300 focus:ring-neutral-900"
-      />
-      <input
-        id="password"
-        name="password"
-        type="password"
-        placeholder="password"
-        autoComplete="current-password"
-        required
-        value={password}
-        onInput={(e) => setPassword(e.currentTarget.value)}
-        className="block border border-neutral-300 focus:ring-neutral-900"
-      />
+    <>
+      <div className="flex flex-col items-center mt-10">
+        <h1 className="text-center m-2 text-3xl font-bold">Welcome to Scheduler</h1>
+        <h2>Sign in to your account</h2>
+        <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col m-11 lg:w-1/3">
+          <form onSubmit={handleSubmit}>
+            <input name="csrfToken" type="hidden" defaultValue={csrfToken || undefined} hidden />
+            <div className="mb-4">
+              <label className="block text-grey-darker text-sm font-bold mb-2" htmlFor="email">
+                Email
+              </label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="email"
+                required
+                value={email}
+                onInput={(e) => setEmail(e.currentTarget.value)}
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker"
+              />
+            </div>
+            <div className="mb-6">
+              <label className="block text-grey-darker text-sm font-bold mb-2" htmlFor="password">
+                Password
+              </label>
+              <input
+                id="password"
+                name="password"
+                type="password"
+                placeholder="password"
+                autoComplete="current-password"
+                required
+                value={password}
+                onInput={(e) => setPassword(e.currentTarget.value)}
+                className="shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker mb-3"
+              />
+            </div>
 
-      <button type="submit" disabled={isSubmitting} className="p-1 text-white bg-blue-800">
-        SIGN IN
-      </button>
-    </form>
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="bg-black hover:bg-blue-dark text-white font-bold py-2 px-4 rounded"
+              style={{ cursor: "pointer" }}>
+              {isSubmitting ? "Loading...  " : "SIGN IN"}
+            </button>
+          </form>
+        </div>
+      </div>
+    </>
   );
 }
 

@@ -7,26 +7,21 @@ export default function Index() {
   const loading = status === "loading";
 
   useEffect(() => {
-    if (session) window.location.replace("/private");
+    if (session) window.location.replace("/eventtypes");
   }, [loading, session]);
 
   return (
-    <div className="pt-8">
-      <Link href="/auth/login">
-        <a className="p-1 text-white bg-blue-800">LOGIN</a>
-      </Link>
-      <Link href="/auth/signup">
-        <a className="p-1 ml-2 text-white bg-blue-800">SIGN UP</a>
-      </Link>
-      <h1 className="py-4 text-3xl font-bold">Launch something bad quickly.</h1>
-      <iframe
-        width="560"
-        height="315"
-        src="https://www.youtube.com/embed/1hHMwLxN6EM"
-        title="YouTube video player"
-        frameBorder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowFullScreen></iframe>
+    <div className="flex flex-col items-center mt-10">
+      <h1 className="text-center m-2 text-3xl font-bold">Welcome to Scheduler</h1>
+      <h2>Proceed to seamless Scheduling</h2>
+      <div className="bg-black shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-row m-11 justify-center lg:w-1/3">
+        <Link href="/auth/login">
+          <a className="p-1 text-white rounded bg-blue-800">LOGIN</a>
+        </Link>
+        <Link href="/auth/signup">
+          <a className="p-1 ml-2 text-white rounded bg-blue-800">SIGN UP</a>
+        </Link>
+      </div>
     </div>
   );
 }
