@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 
-import { hashPassword, slugName } from "@helpers/auth";
+import { hashPassword } from "@helpers/auth";
 import prisma from "@helpers/prisma";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
