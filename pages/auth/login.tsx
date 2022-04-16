@@ -15,8 +15,7 @@ export default function Login({ csrfToken }: ServerSideProps) {
   const [password, setPassword] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const callbackUrl =
-    typeof router.query?.callbackUrl === "string" ? router.query.callbackUrl : "/eventtypes";
+  const callbackUrl = typeof router.query?.callbackUrl === "string" ? router.query.callbackUrl : "/bookings";
 
   async function handleSubmit(e: React.SyntheticEvent) {
     e.preventDefault();
@@ -105,7 +104,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   if (session) {
     return {
       redirect: {
-        destination: "/",
+        destination: "/bookings",
         permanent: false,
       },
     };

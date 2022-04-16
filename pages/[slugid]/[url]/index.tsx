@@ -269,7 +269,7 @@ const Index = ({ data }: PropType) => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { slugid, url } = context.query;
-  const res = await fetch(`http://localhost:3000/api/${slugid}/${url}`);
+  const res = await fetch(`https://simba-agjohngabriel.vercel.app/api/${slugid}/${url}`);
   const response = await res.json();
   return {
     props: {

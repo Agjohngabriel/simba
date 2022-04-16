@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 
 export default function Signup() {
   const [name, setName] = useState("");
+  const [username, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -11,7 +12,7 @@ export default function Signup() {
   useEffect(() => {
     async function redirectOnLogin() {
       const session = await getSession();
-      if (session) window.location.replace("/");
+      if (session) window.location.replace("/bookings");
     }
     redirectOnLogin();
   }, []);
@@ -28,6 +29,7 @@ export default function Signup() {
     return axios
       .post("/api/auth/signup", {
         name,
+        username,
         email,
         password,
       })
@@ -68,6 +70,19 @@ export default function Signup() {
           </p>
         </div>
         <form onSubmit={handleSubmit}>
+          <div className="mb-6">
+            <label className="block text-grey-darker text-sm font-bold mb-2">Name</label>
+            <input
+              id="name"
+              name="name"
+              type="text"
+              placeholder="name"
+              required
+              value={name}
+              onInput={(e) => setName(e.currentTarget.value)}
+              className="shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker mb-3"
+            />
+          </div>
           <label className="block text-grey-darker text-sm font-bold mb-2">username</label>
           <div className="flex flex-wrap items-stretch w-full mb-4 relative">
             <div className="flex -mr-px">
@@ -81,8 +96,8 @@ export default function Signup() {
               type="text"
               placeholder="name"
               required
-              value={name}
-              onInput={(e) => setName(e.currentTarget.value)}
+              value={username}
+              onInput={(e) => setUserName(e.currentTarget.value)}
               className="flex-shrink flex-grow flex-auto leading-normal w-px border h-10 border-grey-light rounded rounded-l-none px-3 relative"
             />
           </div>

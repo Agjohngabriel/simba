@@ -9,7 +9,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   const data = req.body;
-  const { email, password, name } = data;
+  const { email, password, name, username } = data;
   const userEmail = email.toLowerCase();
 
   if (!userEmail || !userEmail.includes("@") || !userEmail.includes(".")) {
@@ -27,7 +27,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       email: userEmail,
     },
   });
-
+  const existingUsername = await prisma.user.findUnique({
+    where: {
+      username: username,
+    },
+  });
+  if (existingUsername) {
+    return res.status(409).json({ message: "Username is already registered" });
+  }
   if (existingUser) {
     return res.status(409).json({ message: "Email address is already registered" });
   }
@@ -36,7 +43,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   await prisma.user.create({
     data: {
-      username: name,
+      username: username,
+      name: name,
       email: userEmail,
       password: hashedPassword,
     },

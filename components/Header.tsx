@@ -19,16 +19,15 @@ const Header = () => {
         </div>
         <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
           <div className="text-sm lg:flex-grow">
+            <Link href="/bookings">
+              <a className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4">Events</a>
+            </Link>
             <Link href="/eventtypes">
               <a className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4">
-                Event Types
+                Event-Types
               </a>
             </Link>
-            <a
-              href="#responsive-header"
-              className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4">
-              Events
-            </a>
+
             <a
               href="#responsive-header"
               className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white">

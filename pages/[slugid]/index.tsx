@@ -117,7 +117,7 @@ const EventTypes = ({ data }: profileType) => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { slugid } = context.query;
-  const res = await fetch(`http://localhost:3000/api/${slugid}`);
+  const res = await fetch(`https://simba-agjohngabriel.vercel.app/api/${slugid}`);
   const response = await res.json();
   console.log(response);
   return {
