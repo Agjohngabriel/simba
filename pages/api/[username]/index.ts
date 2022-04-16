@@ -25,9 +25,15 @@ export default async function all(req: NextApiRequest, res: NextApiResponse) {
       },
     },
   });
-  const result = JSON.stringify(data);
+
+  if (data !== null) {
+    const result = JSON.stringify(data);
+    res.json(result);
+  } else {
+    res.status(404).json({ Message: "No result found" });
+  }
 
   // console.log(result)
   // console.log(data)
-  res.json(result);
+  res.send;
 }

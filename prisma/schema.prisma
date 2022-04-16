@@ -37,6 +37,9 @@ model eventType {
 
 model Event {
   id          String     @id @default(uuid())
+  date        String
+  time        String
+  note        String?
   eventType   eventType? @relation(fields: [eventTypeId], references: [id])
   eventTypeId String?
   user        User       @relation(fields: [userId], references: [id])

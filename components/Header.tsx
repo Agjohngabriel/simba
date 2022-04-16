@@ -1,4 +1,4 @@
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 
 const Header = () => {
@@ -37,11 +37,17 @@ const Header = () => {
           </div>
           <div className="inline-flex">
             <h2 className="mr-5 text-white">{session?.user?.name}</h2>
-            <Link href="/api/auth/signout">
+            <button
+              onClick={() =>
+                signOut({
+                  redirect: true,
+                  callbackUrl: "/",
+                })
+              }>
               <a className="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">
                 Sign Out
               </a>
-            </Link>
+            </button>
           </div>
         </div>
       </nav>

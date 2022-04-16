@@ -1,10 +1,12 @@
 import axios from "axios";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 import { useState } from "react";
 
 import Shell from "@components/Shell";
 
 export default function NewEventTypes() {
+  const router = useRouter();
   const { data: session } = useSession();
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
@@ -31,7 +33,7 @@ export default function NewEventTypes() {
       })
       .then(() => {
         alert("success");
-        window.location.replace("/eventtypes");
+        router.replace("/eventtypes");
       })
       .catch((e) => {
         setIsSubmitting(false);
@@ -75,7 +77,7 @@ export default function NewEventTypes() {
                   id="grid-last-name"
                   type="text"
                   name="url"
-                  placeholder="Quick Meeting"
+                  placeholder="https://"
                   value={url}
                   onInput={(e) => setUrl(e.currentTarget.value)}
                 />
@@ -97,7 +99,6 @@ export default function NewEventTypes() {
                   value={description}
                   onInput={(e) => setDescription(e.currentTarget.value)}
                 />
-                <p className="text-gray-600 text-xs italic">Make it as long and as crazy as you like</p>
               </div>
             </div>
             <div className="flex flex-wrap -mx-3 mb-2">
@@ -142,9 +143,9 @@ export default function NewEventTypes() {
                 </div>
               </div>
             </div>
-            <div className="flex flex-wrap -mx-3 mb-6">
-              <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded w-full">
-                Button
+            <div className="flex flex-wrap -mx-3 mt-5 mb-6">
+              <button className="bg-black hover:bg-gray-700 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded w-full">
+                {isSubmitting ? "Loading" : "Submit"}
               </button>
             </div>
           </form>
