@@ -11,6 +11,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const data = req.body;
   const { email, password, name, username } = data;
   const userEmail = email.toLowerCase();
+  const fullName: string = name;
+  const nName: string = username;
 
   if (!userEmail || !userEmail.includes("@") || !userEmail.includes(".")) {
     res.status(422).json({ message: "Invalid email" });
@@ -43,8 +45,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   await prisma.user.create({
     data: {
-      name: name,
-      username: username,
+      name: fullName,
+      username: nName,
       email: userEmail,
       password: hashedPassword,
     },
