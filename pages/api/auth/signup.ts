@@ -9,7 +9,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   const data = req.body;
-  const { email, password, name, username } = data;
+  const name = data.name;
+  const { email, password, username } = data;
   const userEmail = email.toLowerCase();
 
   if (!userEmail || !userEmail.includes("@") || !userEmail.includes(".")) {
